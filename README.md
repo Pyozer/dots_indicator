@@ -6,13 +6,8 @@ Widget to display dots indicator to show a position (for a pageview for example)
 
 You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
 
-You can import from Pub:
-```yaml
-dependencies:
-  dots_indicator: ^1.0.0
-```
-
-or from Git repository:
+This package is not upload to Pub yet.
+So you need to add it from Git repository:
 ```yaml
 dependencies:
   dots_indicator:
