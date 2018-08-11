@@ -3,11 +3,15 @@ import 'package:test/test.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 void main() {
-  /*test('adds one to input values', () {
-    final calculator = new Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
-    expect(() => calculator.addOne(null), throwsNoSuchMethodError);
-  });*/
+  test('Create a dot indicator with 5 dots', () {
+    final dotsIndicator = new DotsIndicator(numberOfDot: 5);
+    expect(dotsIndicator.numberOfDot, 5);
+    expect(dotsIndicator.position, 0);
+  });
+
+  test('Create a dot indicator with 3 dots and positioned on second dot', () {
+    final dotsIndicator = new DotsIndicator(numberOfDot: 3, position: 1);
+    expect(dotsIndicator.numberOfDot, 3);
+    expect(dotsIndicator.position, 1);
+  });
 }
