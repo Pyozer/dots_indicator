@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## 0.0.2
 
-* TODO: Describe initial release.
+* Add asserts to avoid bug
+
+## 0.0.1
+
+* Initial Release

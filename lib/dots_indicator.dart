@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class DotsIndicator extends StatelessWidget {
   static const Size kDefaultSize = const Size.square(9.0);
   static const EdgeInsets kDefaultSpacing =
-  const EdgeInsets.symmetric(horizontal: 6.0);
+      const EdgeInsets.symmetric(horizontal: 6.0);
   static const ShapeBorder kDefaultShape = const CircleBorder();
 
   final int numberOfDot;
@@ -18,18 +18,29 @@ class DotsIndicator extends StatelessWidget {
   final ShapeBorder dotActiveShape;
   final EdgeInsets dotSpacing;
 
-  const DotsIndicator(
+  DotsIndicator(
       {Key key,
-        @required this.numberOfDot,
-        this.position = 0,
-        this.dotColor = Colors.grey,
-        this.dotActiveColor = Colors.lightBlue,
-        this.dotSize = kDefaultSize,
-        this.dotActiveSize = kDefaultSize,
-        this.dotShape = kDefaultShape,
-        this.dotActiveShape = kDefaultShape,
-        this.dotSpacing = kDefaultSpacing})
-      : super(key: key);
+      @required this.numberOfDot,
+      this.position = 0,
+      this.dotColor = Colors.grey,
+      this.dotActiveColor = Colors.lightBlue,
+      this.dotSize = kDefaultSize,
+      this.dotActiveSize = kDefaultSize,
+      this.dotShape = kDefaultShape,
+      this.dotActiveShape = kDefaultShape,
+      this.dotSpacing = kDefaultSpacing})
+      : assert(numberOfDot != null),
+        assert(position != null),
+        assert(dotColor != null),
+        assert(dotActiveColor != null),
+        assert(dotSize != null),
+        assert(dotActiveSize != null),
+        assert(dotShape != null),
+        assert(dotActiveShape != null),
+        assert(dotSpacing != null),
+        assert(position < numberOfDot,
+            "The position must be inferior of numberOfDot (position start at 0). Example for active last dot: numberOfDot=3 / position=2"),
+        super(key: key);
 
   List<Widget> _generateDots() {
     List<Widget> dots = [];
