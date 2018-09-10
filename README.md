@@ -10,8 +10,7 @@ This package is not upload to Pub yet.
 So you need to add it from Git repository:
 ```yaml
 dependencies:
-  dots_indicator:
-    git: git://github.com/pyozer/dots_indicator
+  dots_indicator: ^0.0.3
 ```
 
 # Example
