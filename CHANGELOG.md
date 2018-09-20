@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Fix full width of the widget. (Thanks to fvisticot)
+  
 ## 0.0.3
 
 * Publish on Pub

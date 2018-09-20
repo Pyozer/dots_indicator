@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 
 class DotsIndicator extends StatelessWidget {
   static const Size kDefaultSize = const Size.square(9.0);
-  static const EdgeInsets kDefaultSpacing =
-      const EdgeInsets.symmetric(horizontal: 6.0);
+  static const EdgeInsets kDefaultSpacing = const EdgeInsets.all(6.0);
   static const ShapeBorder kDefaultShape = const CircleBorder();
 
   final int numberOfDot;
@@ -42,7 +41,7 @@ class DotsIndicator extends StatelessWidget {
             "The position must be inferior of numberOfDot (position start at 0). Example for active last dot: numberOfDot=3 / position=2"),
         super(key: key);
 
-  List<Widget> _generateDots() {
+  List<Widget> _buildDots() {
     List<Widget> dots = [];
     for (int i = 0; i < numberOfDot; i++) {
       final color = (i == position) ? dotActiveColor : dotColor;
@@ -63,6 +62,11 @@ class DotsIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: _generateDots());
+    return Container(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: _buildDots(),
+      ),
+    );
   }
 }
