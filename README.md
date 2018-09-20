@@ -2,7 +2,7 @@
 
 Widget to display dots indicator to show a position (for a pageview for example).
 
-# Installation
+## Installation
 
 You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
 
@@ -11,7 +11,7 @@ dependencies:
   dots_indicator: ^0.0.4
 ```
 
-# Example
+## Example
 
 In these example, `pageLength` is the total of dots to display and `currentIndexPage` is the position to hightlight (the active dot).
 
@@ -87,4 +87,3 @@ new DotsIndicator(
   dotSpacing: const EdgeInsets.all(10.0)
 )
 ```
-
