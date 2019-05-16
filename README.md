@@ -1,6 +1,6 @@
 # dots_indicator
 
-Widget to display dots indicator to show a position (for a pageview for example).
+Widget to display dots indicator to show a position (for a PageView for example).
 
 ## Installation
 
@@ -8,7 +8,7 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^0.0.4
+  dots_indicator: ^0.0.5
 ```
 
 ## Example
@@ -21,7 +21,7 @@ In these example, `pageLength` is the total of dots to display and `currentIndex
 
 ```dart
 new DotsIndicator(
-  numberOfDot: pageLength,
+  dotsCount: pageLength,
   position: currentIndexPage
 )
 ```
@@ -32,10 +32,12 @@ new DotsIndicator(
 
 ```dart
 new DotsIndicator(
-  numberOfDot: pageLength,
+  dotsCount: pageLength,
   position: currentIndexPage,
-  dotColor: Colors.black87,
-  dotActiveColor: Colors.redAccent
+  decorator: DotsDecorator(
+    color: Colors.black87,
+    activeColor: Colors.redAccent,
+  ),
 )
 ```
 
@@ -43,17 +45,19 @@ new DotsIndicator(
 
 You can change the default size of dots.<br />
 So you can choose to have dots for no active positions and a rounded rectangle for active position for example.<br />
-**By default, the shape of dots is CircleBorder, so to have a rounded rectangle for active, you need to change dotActiveShape**
+**By default, the shape of dots is CircleBorder, so to have a rounded rectangle for active, you need to change `activeShape`**
 
 ![Custom dots size](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_size.gif)
 
 ```dart
 new DotsIndicator(
-  numberOfDot: pageLength,
+  dotsCount: pageLength,
   position: currentIndexPage,
-  dotSize: const Size.square(9.0),
-  dotActiveSize: const Size(18.0, 9.0),
-  dotActiveShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))
+  decorator: DotsDecorator(
+    size: const Size.square(9.0),
+    activeSize: const Size(18.0, 9.0),
+    activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+  ),
 )
 ```
 
@@ -66,10 +70,12 @@ You can change the no active and active dot shape.
 
 ```dart
 new DotsIndicator(
-  numberOfDot: pageLength,
+  dotsCount: pageLength,
   position: currentIndexPage,
-  dotShape: const Border(),
-  dotActiveShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))
+  decorator: DotsDecorator(
+    shape: const Border(),
+    activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+  ),
 )
 ```
 
@@ -82,8 +88,10 @@ But if you want you can change it, for example to increase the space between dot
 
 ```dart
 new DotsIndicator(
-  numberOfDot: pageLength,
+  dotsCount: pageLength,
   position: currentIndexPage,
-  dotSpacing: const EdgeInsets.all(10.0)
+  decorator: DotsDecorator(
+    spacing: const EdgeInsets.all(10.0),
+  ),
 )
 ```

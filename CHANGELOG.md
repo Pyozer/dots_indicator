@@ -1,3 +1,7 @@
+## 0.0.5
+
+* __BREAKING :__ Now dots customizations like color, size and spacing are provided by a DotsDecorator model with `decorator` property.
+
 ## 0.0.4
 
 * Fix full width of the widget. (Thanks to fvisticot)
