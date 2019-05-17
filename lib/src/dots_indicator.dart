@@ -14,7 +14,7 @@ class DotsIndicator extends StatelessWidget {
     this.position = 0,
     this.decorator = const DotsDecorator(),
   })  : assert(dotsCount != null && dotsCount > 0),
-        assert(position != null && position > 0),
+        assert(position != null && position >= 0),
         assert(decorator != null),
         assert(
           position < dotsCount,
