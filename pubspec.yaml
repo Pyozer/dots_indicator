@@ -5,8 +5,13 @@ author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
 homepage: https://github.com/pyozer/dots_indicator
 
 dependencies:
-  flutter:
-    sdk: flutter
+  flutter_web: any
 
 environment:
   sdk: '>=2.0.0-dev.58.0 <3.0.0'
+
+dependency_overrides:
+  flutter_web:
+    git:
+      url: https://github.com/flutter/flutter_web
+      path: packages/flutter_web
