@@ -4,14 +4,19 @@ version: 0.0.5+1
 author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
 homepage: https://github.com/pyozer/dots_indicator
 
-dependencies:
-  flutter_web: any
-
 environment:
   sdk: '>=2.0.0-dev.58.0 <3.0.0'
+
+dependencies:
+  flutter_web: any
+  flutter_web_ui: any
 
 dependency_overrides:
   flutter_web:
     git:
       url: https://github.com/flutter/flutter_web
       path: packages/flutter_web
+  flutter_web_ui:
+    git:
+      url: https://github.com/flutter/flutter_web
+      path: packages/flutter_web_ui
