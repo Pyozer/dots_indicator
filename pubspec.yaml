@@ -1,12 +1,12 @@
 name: dots_indicator
 description: Dots indicator to show progression of a PageView for example
-version: 0.0.5+1
+version: 1.0.0
 author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
 homepage: https://github.com/pyozer/dots_indicator
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-environment:
-  sdk: '>=2.0.0-dev.58.0 <3.0.0'

@@ -1,3 +1,9 @@
+## 1.0.0
+
+* Add `axis` property to have possibility to display dots as vertical
+* Add `reversed` property to display dots in reverse position
+* Add example app
+
 ## 0.0.5+1
 
 * Fix assert on `position` property

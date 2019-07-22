@@ -8,7 +8,7 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^0.0.5
+  dots_indicator: ^1.0.0
 ```
 
 ## Example
@@ -95,3 +95,13 @@ new DotsIndicator(
   ),
 )
 ```
+
+### Axis and reverse property
+
+There is two other property, `axis` and `reversed`.
+Axis is to display dots indicator horizontally (default) or vertically.
+Also, you can set `reversed: true` to reverse the order of dots. (default: false).
+
+For example, if you want to display the dots indicator vertically, but with the first dots on bottom :
+Set `axis: Axis.vertical` and `reversed: true`.
+Obviously, you can use reversed with `Axis.horizontal`.
