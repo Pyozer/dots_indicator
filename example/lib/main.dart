@@ -9,7 +9,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _totalDots = 6;
+  final _totalDots = 5;
   int _currentPosition = 0;
 
   int _validPosition(int position) {
@@ -31,6 +31,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    const decorator = DotsDecorator(
+      activeColor: Colors.red,
+      activeSize: Size.square(12.0),
+    );
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -40,7 +45,11 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Current position: ${(_currentPosition + 1)} / $_totalDots'),
+              Text(
+                'Current position ${(_currentPosition + 1)} / $_totalDots',
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, fontSize: 16.0),
+              ),
               _buildRow([
                 FloatingActionButton(
                   child: Icon(Icons.remove),
@@ -60,12 +69,14 @@ class _MyAppState extends State<MyApp> {
                   dotsCount: _totalDots,
                   position: _currentPosition,
                   axis: Axis.vertical,
+                  decorator: decorator,
                 ),
                 DotsIndicator(
                   dotsCount: _totalDots,
                   position: _currentPosition,
                   axis: Axis.vertical,
                   reversed: true,
+                  decorator: decorator,
                 ),
               ]),
               _buildRow([
@@ -73,6 +84,7 @@ class _MyAppState extends State<MyApp> {
                 DotsIndicator(
                   dotsCount: _totalDots,
                   position: _currentPosition,
+                  decorator: decorator,
                 ),
               ]),
               _buildRow([
@@ -81,6 +93,7 @@ class _MyAppState extends State<MyApp> {
                   dotsCount: _totalDots,
                   position: _currentPosition,
                   reversed: true,
+                  decorator: decorator,
                 ),
               ])
             ],
