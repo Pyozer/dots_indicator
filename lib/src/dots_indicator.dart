@@ -29,13 +29,19 @@ class DotsIndicator extends StatelessWidget {
   Widget _buildDot(int index) {
     final isCurrent = index == position;
     final size = isCurrent ? decorator.activeSize : decorator.size;
+    final activeColor = index < decorator.activeColors.length
+        ? decorator.activeColors[index]
+        : decorator.activeColor;
+    final color = index < decorator.colors.length
+        ? decorator.colors[index]
+        : decorator.color;
 
     return Container(
       width: size.width,
       height: size.height,
       margin: decorator.spacing,
       decoration: ShapeDecoration(
-        color: isCurrent ? decorator.activeColor : decorator.color,
+        color: isCurrent ? activeColor : color,
         shape: isCurrent ? decorator.activeShape : decorator.shape,
       ),
     );
