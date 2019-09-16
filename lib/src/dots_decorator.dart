@@ -10,10 +10,20 @@ class DotsDecorator {
   /// @Default `Colors.grey`
   final Color color;
 
+  /// List of inactive dot colors
+  ///
+  /// @Default `Value of color`
+  final List<Color> colors;
+
   /// Active dot color
   ///
   /// @Default `Colors.lightBlue`
   final Color activeColor;
+
+  /// List of active dot colors
+  ///
+  /// @Default `CValue of activeColor`
+  final List<Color> activeColors;
 
   /// Inactive dot size
   ///
@@ -42,14 +52,18 @@ class DotsDecorator {
 
   const DotsDecorator({
     this.color = Colors.grey,
+    this.colors = const [],
     this.activeColor = Colors.lightBlue,
+    this.activeColors = const [],
     this.size = kDefaultSize,
     this.activeSize = kDefaultSize,
     this.shape = kDefaultShape,
     this.activeShape = kDefaultShape,
     this.spacing = kDefaultSpacing,
   })  : assert(color != null),
+        assert(colors != null),
         assert(activeColor != null),
+        assert(activeColors != null),
         assert(size != null),
         assert(activeSize != null),
         assert(shape != null),
