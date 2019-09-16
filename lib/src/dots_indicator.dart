@@ -40,10 +40,10 @@ class DotsIndicator extends StatelessWidget {
     final isCurrent = index == position;
     final size = isCurrent ? decorator.activeSize : decorator.size;
     final activeColor = index < decorator.activeColors.length
-        ? decorator.activeColors[index]
+        ? decorator.activeColors[index] ?? decorator.activeColor
         : decorator.activeColor;
     final color = index < decorator.colors.length
-        ? decorator.colors[index]
+        ? decorator.colors[index] ?? decorator.color
         : decorator.color;
 
     final dot = Container(
