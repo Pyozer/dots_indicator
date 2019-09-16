@@ -37,23 +37,22 @@ class DotsIndicator extends StatelessWidget {
         super(key: key);
 
   Widget _buildDot(int index) {
-    final state = min(1.0, (position - index).abs());
-
-    final size = Size.lerp(decorator.activeSize, decorator.size, state)!;
-    final color = Color.lerp(decorator.activeColor, decorator.color, state);
-    final shape = ShapeBorder.lerp(
-      decorator.activeShape,
-      decorator.shape,
-      state,
-    )!;
+    final isCurrent = index == position;
+    final size = isCurrent ? decorator.activeSize : decorator.size;
+    final activeColor = index < decorator.activeColors.length
+        ? decorator.activeColors[index]
+        : decorator.activeColor;
+    final color = index < decorator.colors.length
+        ? decorator.colors[index]
+        : decorator.color;
 
     final dot = Container(
       width: size.width,
       height: size.height,
       margin: decorator.spacing,
       decoration: ShapeDecoration(
-        color: color,
-        shape: shape,
+        color: isCurrent ? activeColor : color,
+        shape: isCurrent ? decorator.activeShape : decorator.shape,
       ),
     );
     return onTap == null
