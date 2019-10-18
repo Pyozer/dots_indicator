@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
@@ -10,15 +12,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _totalDots = 5;
-  int _currentPosition = 0;
+  double _currentPosition = 0;
 
-  int _validPosition(int position) {
+  double _validPosition(double position) {
     if (position >= _totalDots) return 0;
-    if (position < 0) return _totalDots - 1;
+    if (position < 0) return _totalDots - 1.0;
     return position;
   }
 
-  void _updatePosition(int position) {
+  void _updatePosition(double position) {
     setState(() => _currentPosition = _validPosition(position));
   }
 
@@ -32,9 +34,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     const decorator = DotsDecorator(
-      activeColor: Colors.red,
-      activeSize: Size.square(12.0),
-    );
+        activeColor: Colors.red,
+        activeSize: Size.square(50.0),
+        activeShape: RoundedRectangleBorder());
 
     return MaterialApp(
       home: Scaffold(
@@ -51,13 +53,21 @@ class _MyAppState extends State<MyApp> {
                     fontWeight: FontWeight.w600, fontSize: 16.0),
               ),
               _buildRow([
+                Slider(
+                  value: _currentPosition,
+                  max: (_totalDots - 1).toDouble(),
+                  onChanged: (value) => _updatePosition(value),
+                )
+              ]),
+              _buildRow([
                 FloatingActionButton(
                   child: Icon(Icons.remove),
-                  onPressed: () => _updatePosition(--_currentPosition),
+                  onPressed: () => _updatePosition(max(--_currentPosition, 0)),
                 ),
                 FloatingActionButton(
                   child: Icon(Icons.add),
-                  onPressed: () => _updatePosition(++_currentPosition),
+                  onPressed: () => _updatePosition(
+                      min(++_currentPosition, _totalDots.toDouble())),
                 )
               ]),
               _buildRow([
