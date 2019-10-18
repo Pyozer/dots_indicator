@@ -34,9 +34,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     const decorator = DotsDecorator(
-        activeColor: Colors.red,
-        activeSize: Size.square(50.0),
-        activeShape: RoundedRectangleBorder());
+      activeColor: Colors.red,
+      activeSize: Size.square(50.0),
+      activeShape: RoundedRectangleBorder(),
+    );
 
     return MaterialApp(
       home: Scaffold(
@@ -50,13 +51,15 @@ class _MyAppState extends State<MyApp> {
               Text(
                 'Current position ${(_currentPosition + 1)} / $_totalDots',
                 style: const TextStyle(
-                    fontWeight: FontWeight.w600, fontSize: 16.0),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16.0,
+                ),
               ),
               _buildRow([
                 Slider(
                   value: _currentPosition,
                   max: (_totalDots - 1).toDouble(),
-                  onChanged: (value) => _updatePosition(value),
+                  onChanged: _updatePosition,
                 )
               ]),
               _buildRow([
@@ -105,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                   reversed: true,
                   decorator: decorator,
                 ),
-              ])
+              ]),
             ],
           ),
         ),

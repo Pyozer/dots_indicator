@@ -1,3 +1,9 @@
+# CHANGELOG
+
+## 1.0.1
+
+* Set position to `double` and add transition between dots (Thanks to [PR#8](https://github.com/Pyozer/dots_indicator/pull/8))
+
 ## 1.0.0
 
 * Add `axis` property to have possibility to display dots as vertical

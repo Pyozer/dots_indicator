@@ -34,8 +34,11 @@ class DotsIndicator extends StatelessWidget {
 
     final size = Size.lerp(decorator.activeSize, decorator.size, state);
     final color = Color.lerp(decorator.activeColor, decorator.color, state);
-    final shape =
-        ShapeBorder.lerp(decorator.activeShape, decorator.shape, state);
+    final shape = ShapeBorder.lerp(
+      decorator.activeShape,
+      decorator.shape,
+      state,
+    );
 
     return Container(
       width: size.width,
@@ -51,16 +54,10 @@ class DotsIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dotsList = List<Widget>.generate(dotsCount, _buildDot);
+    final dots = reversed == true ? dotsList.reversed.toList() : dotsList;
 
-    if (axis == Axis.vertical) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: reversed == true ? dotsList.reversed.toList() : dotsList,
-      );
-    }
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: reversed == true ? dotsList.reversed.toList() : dotsList,
-    );
+    return axis == Axis.vertical
+        ? Column(mainAxisSize: MainAxisSize.min, children: dots)
+        : Row(mainAxisSize: MainAxisSize.min, children: dots);
   }
 }
