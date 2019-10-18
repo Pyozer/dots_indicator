@@ -1,11 +1,14 @@
 library dots_indicator;
 
+import 'dart:math';
+import 'dart:ui';
+
 import 'package:dots_indicator/src/dots_decorator.dart';
 import 'package:flutter/material.dart';
 
 class DotsIndicator extends StatelessWidget {
   final int dotsCount;
-  final int position;
+  final double position;
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
@@ -27,16 +30,20 @@ class DotsIndicator extends StatelessWidget {
         super(key: key);
 
   Widget _buildDot(int index) {
-    final isCurrent = index == position;
-    final size = isCurrent ? decorator.activeSize : decorator.size;
+    final state = min(1.0, (position - index).abs());
+
+    final size = Size.lerp(decorator.activeSize, decorator.size, state);
+    final color = Color.lerp(decorator.activeColor, decorator.color, state);
+    final shape =
+        ShapeBorder.lerp(decorator.activeShape, decorator.shape, state);
 
     return Container(
       width: size.width,
       height: size.height,
       margin: decorator.spacing,
       decoration: ShapeDecoration(
-        color: isCurrent ? decorator.activeColor : decorator.color,
-        shape: isCurrent ? decorator.activeShape : decorator.shape,
+        color: color,
+        shape: shape,
       ),
     );
   }
