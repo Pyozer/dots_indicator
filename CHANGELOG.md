@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.0.1
+## 1.1.0
 
 * Set position to `double` and add transition between dots (Thanks to [PR#8](https://github.com/Pyozer/dots_indicator/pull/8))
 

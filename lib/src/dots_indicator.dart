@@ -16,7 +16,7 @@ class DotsIndicator extends StatelessWidget {
   const DotsIndicator({
     Key key,
     @required this.dotsCount,
-    this.position = 0,
+    this.position = 0.0,
     this.decorator = const DotsDecorator(),
     this.axis = Axis.horizontal,
     this.reversed = false,

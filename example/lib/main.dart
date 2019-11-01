@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _totalDots = 5;
-  double _currentPosition = 0;
+  double _currentPosition = 0.0;
 
   double _validPosition(double position) {
     if (position >= _totalDots) return 0;
@@ -25,10 +25,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _buildRow(List<Widget> widgets) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: widgets,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: widgets,
+      ),
     );
+  }
+
+  String getCurrentPositionPretty() {
+    return (_currentPosition + 1.0).toStringAsPrecision(2);
   }
 
   @override
@@ -45,16 +52,19 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Dots indicator example'),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(16.0),
             children: [
               Text(
-                'Current position ${(_currentPosition + 1)} / $_totalDots',
+                'Current position ${getCurrentPositionPretty()} / $_totalDots',
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16.0,
                 ),
+                textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 16.0),
               _buildRow([
                 Slider(
                   value: _currentPosition,
@@ -64,18 +74,32 @@ class _MyAppState extends State<MyApp> {
               ]),
               _buildRow([
                 FloatingActionButton(
-                  child: Icon(Icons.remove),
-                  onPressed: () => _updatePosition(max(--_currentPosition, 0)),
+                  child: const Icon(Icons.remove),
+                  onPressed: () {
+                    _currentPosition = _currentPosition.ceilToDouble();
+                    _updatePosition(max(--_currentPosition, 0));
+                  },
                 ),
                 FloatingActionButton(
-                  child: Icon(Icons.add),
-                  onPressed: () => _updatePosition(
-                      min(++_currentPosition, _totalDots.toDouble())),
+                  child: const Icon(Icons.add),
+                  onPressed: () {
+                    _currentPosition = _currentPosition.floorToDouble();
+                    _updatePosition(min(
+                      ++_currentPosition,
+                      _totalDots.toDouble(),
+                    ));
+                  },
                 )
               ]),
               _buildRow([
-                Text('Vertical'),
-                Text('Vertical reversed'),
+                Text(
+                  'Vertical',
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.0),
+                ),
+                Text(
+                  'Vertical reversed',
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.0),
+                ),
               ]),
               _buildRow([
                 DotsIndicator(
