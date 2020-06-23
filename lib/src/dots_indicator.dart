@@ -55,10 +55,12 @@ class DotsIndicator extends StatelessWidget {
         shape: shape,
       ),
     );
-    return onTap == null ? dot : GestureDetector(
-        onTap: () => onTap(index),
-        child: dot
-    );
+    return onTap == null
+        ? dot
+        : InkWell(
+            customBorder: CircleBorder(),
+            onTap: () => onTap(index),
+            child: dot);
   }
 
   @override
