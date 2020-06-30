@@ -8,7 +8,7 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^1.0.0
+  dots_indicator: ^1.2.0
 ```
 
 ## Example
@@ -35,7 +35,7 @@ new DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
-    color: Colors.black87,
+    color: Colors.black87, // Inactive color
     activeColor: Colors.redAccent,
   ),
 )
@@ -105,3 +105,13 @@ Also, you can set `reversed: true` to reverse the order of dots. (default: false
 For example, if you want to display the dots indicator vertically, but with the first dots on bottom :
 Set `axis: Axis.vertical` and `reversed: true`.
 Obviously, you can use reversed with `Axis.horizontal`.
+
+### onTap property
+
+You can add `onTap` property, to listen when a dot has been pressed.
+Exemple:
+```
+onTap: (position) {
+  setState(() => _currentPos = position);
+}
+```
