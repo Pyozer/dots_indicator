@@ -1,7 +1,6 @@
 name: dots_indicator
 description: Dots indicator to show progression of a PageView for example
 version: 1.2.0
-author: Jean-Charles Moussé <jeancharles.msse@gmail.com>
 homepage: https://github.com/pyozer/dots_indicator
 
 environment:

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0
+
+* Add `onTap` callback (Thanks to [PR#10](https://github.com/Pyozer/dots_indicator/pull/10))
+
 ## 1.1.0
 
 * Set position to `double` and add transition between dots (Thanks to [PR#8](https://github.com/Pyozer/dots_indicator/pull/8))
