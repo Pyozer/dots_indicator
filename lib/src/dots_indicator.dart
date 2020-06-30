@@ -12,6 +12,9 @@ class DotsIndicator extends StatelessWidget {
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
+  final void Function(int) onTap;
+  final MainAxisSize mainAxisSize;
+  final MainAxisAlignment mainAxisAlignment;
 
   const DotsIndicator({
     Key key,
@@ -20,6 +23,9 @@ class DotsIndicator extends StatelessWidget {
     this.decorator = const DotsDecorator(),
     this.axis = Axis.horizontal,
     this.reversed = false,
+    this.mainAxisSize = MainAxisSize.min,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.onTap
   })  : assert(dotsCount != null && dotsCount > 0),
         assert(position != null && position >= 0),
         assert(decorator != null),
@@ -40,7 +46,7 @@ class DotsIndicator extends StatelessWidget {
       state,
     );
 
-    return Container(
+    final dot = Container(
       width: size.width,
       height: size.height,
       margin: decorator.spacing,
@@ -49,6 +55,12 @@ class DotsIndicator extends StatelessWidget {
         shape: shape,
       ),
     );
+    return onTap == null
+        ? dot
+        : InkWell(
+            customBorder: CircleBorder(),
+            onTap: () => onTap(index),
+            child: dot);
   }
 
   @override
@@ -57,7 +69,13 @@ class DotsIndicator extends StatelessWidget {
     final dots = reversed == true ? dotsList.reversed.toList() : dotsList;
 
     return axis == Axis.vertical
-        ? Column(mainAxisSize: MainAxisSize.min, children: dots)
-        : Row(mainAxisSize: MainAxisSize.min, children: dots);
+        ? Column(
+          mainAxisAlignment: mainAxisAlignment,
+          mainAxisSize: mainAxisSize,
+          children: dots)
+        : Row(
+          mainAxisAlignment: mainAxisAlignment,
+          mainAxisSize: mainAxisSize,
+            children: dots);
   }
 }
