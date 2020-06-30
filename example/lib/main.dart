@@ -107,6 +107,9 @@ class _MyAppState extends State<MyApp> {
                   position: _currentPosition,
                   axis: Axis.vertical,
                   decorator: decorator,
+                  onTap: (pos) {
+                    setState(() => _currentPosition = pos);
+                  },
                 ),
                 DotsIndicator(
                   dotsCount: _totalDots,

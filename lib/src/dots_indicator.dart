@@ -6,13 +6,15 @@ import 'dart:ui';
 import 'package:dots_indicator/src/dots_decorator.dart';
 import 'package:flutter/material.dart';
 
+typedef void OnTap(double position);
+
 class DotsIndicator extends StatelessWidget {
   final int dotsCount;
   final double position;
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
-  final void Function(int) onTap;
+  final OnTap onTap;
   final MainAxisSize mainAxisSize;
   final MainAxisAlignment mainAxisAlignment;
 
@@ -25,7 +27,7 @@ class DotsIndicator extends StatelessWidget {
     this.reversed = false,
     this.mainAxisSize = MainAxisSize.min,
     this.mainAxisAlignment = MainAxisAlignment.center,
-    this.onTap
+    this.onTap,
   })  : assert(dotsCount != null && dotsCount > 0),
         assert(position != null && position >= 0),
         assert(decorator != null),
@@ -58,9 +60,10 @@ class DotsIndicator extends StatelessWidget {
     return onTap == null
         ? dot
         : InkWell(
-            customBorder: CircleBorder(),
-            onTap: () => onTap(index),
-            child: dot);
+            customBorder: const CircleBorder(),
+            onTap: () => onTap(index.toDouble()),
+            child: dot,
+          );
   }
 
   @override
@@ -70,12 +73,14 @@ class DotsIndicator extends StatelessWidget {
 
     return axis == Axis.vertical
         ? Column(
-          mainAxisAlignment: mainAxisAlignment,
-          mainAxisSize: mainAxisSize,
-          children: dots)
+            mainAxisAlignment: mainAxisAlignment,
+            mainAxisSize: mainAxisSize,
+            children: dots,
+          )
         : Row(
-          mainAxisAlignment: mainAxisAlignment,
-          mainAxisSize: mainAxisSize,
-            children: dots);
+            mainAxisAlignment: mainAxisAlignment,
+            mainAxisSize: mainAxisSize,
+            children: dots,
+          );
   }
 }
