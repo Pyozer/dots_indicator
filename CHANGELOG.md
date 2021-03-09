@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.0
+
+* Add null-safety support (Thanks to [PR#15](https://github.com/Pyozer/dots_indicator/pull/15))
+
 ## 1.2.0
 
 * Add `onTap` callback (Thanks to [PR#10](https://github.com/Pyozer/dots_indicator/pull/10))

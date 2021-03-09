@@ -8,7 +8,7 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^1.2.0
+  dots_indicator: ^2.0.0
 ```
 
 ## Example

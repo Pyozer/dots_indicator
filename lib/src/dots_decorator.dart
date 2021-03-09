@@ -48,11 +48,5 @@ class DotsDecorator {
     this.shape = kDefaultShape,
     this.activeShape = kDefaultShape,
     this.spacing = kDefaultSpacing,
-  })  : assert(color != null),
-        assert(activeColor != null),
-        assert(size != null),
-        assert(activeSize != null),
-        assert(shape != null),
-        assert(activeShape != null),
-        assert(spacing != null);
+  });
 }
