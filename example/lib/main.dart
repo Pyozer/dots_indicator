@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildRow(List<Widget> widgets) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
+      padding: const EdgeInsets.only(bottom: 24.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: widgets,
@@ -34,16 +34,24 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String getCurrentPositionPretty() {
-    return (_currentPosition + 1.0).toStringAsPrecision(2);
+  String getPrettyCurrPosition() {
+    return (_currentPosition + 1.0).toStringAsPrecision(3);
   }
 
   @override
   Widget build(BuildContext context) {
-    const decorator = DotsDecorator(
+    final decorator = DotsDecorator(
       activeColor: Colors.red,
-      activeSize: Size.square(50.0),
-      activeShape: RoundedRectangleBorder(),
+      size: Size.square(15.0),
+      activeSize: Size.square(35.0),
+      activeShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+    );
+
+    const titleStyle = TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 18.0,
     );
 
     return MaterialApp(
@@ -56,21 +64,20 @@ class _MyAppState extends State<MyApp> {
             shrinkWrap: true,
             padding: const EdgeInsets.all(16.0),
             children: [
-              Text(
-                'Current position ${getCurrentPositionPretty()} / $_totalDots',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16.0),
               _buildRow([
-                Slider(
+                Text(
+                  'Current position ${getPrettyCurrPosition()} / $_totalDots',
+                  style: titleStyle,
+                ),
+              ]),
+              _buildRow([
+                SizedBox(
+                  width: 300.0,
+                  child: Slider(
                   value: _currentPosition,
                   max: (_totalDots - 1).toDouble(),
                   onChanged: _updatePosition,
-                )
+                ),),
               ]),
               _buildRow([
                 FloatingActionButton(
@@ -92,43 +99,101 @@ class _MyAppState extends State<MyApp> {
                 )
               ]),
               _buildRow([
-                Text(
-                  'Vertical',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.0),
+                Column(
+                  children: [
+                    const Text('Vertical', style: titleStyle),
+                    const SizedBox(height: 16.0),
+                    DotsIndicator(
+                      dotsCount: _totalDots,
+                      position: _currentPosition,
+                      axis: Axis.vertical,
+                      decorator: decorator,
+                      onTap: (pos) {
+                        setState(() => _currentPosition = pos);
+                      },
+                    ),
+                  ],
                 ),
-                Text(
-                  'Vertical reversed',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.0),
-                ),
-              ]),
-              _buildRow([
-                DotsIndicator(
-                  dotsCount: _totalDots,
-                  position: _currentPosition,
-                  axis: Axis.vertical,
-                  decorator: decorator,
-                  onTap: (pos) {
-                    setState(() => _currentPosition = pos);
-                  },
-                ),
-                DotsIndicator(
-                  dotsCount: _totalDots,
-                  position: _currentPosition,
-                  axis: Axis.vertical,
-                  reversed: true,
-                  decorator: decorator,
-                ),
-              ]),
-              _buildRow([
-                Text('Horizontal'),
-                DotsIndicator(
-                  dotsCount: _totalDots,
-                  position: _currentPosition,
-                  decorator: decorator,
+                Column(
+                  children: [
+                    const Text('Vertical reversed', style: titleStyle),
+                    const SizedBox(height: 16.0),
+                    DotsIndicator(
+                      dotsCount: _totalDots,
+                      position: _currentPosition,
+                      axis: Axis.vertical,
+                      reversed: true,
+                      decorator: decorator,
+                    ),
+                  ],
                 ),
               ]),
               _buildRow([
-                Text('Horizontal reversed'),
+                const Text('Horizontal', style: titleStyle),
+              ]),
+              _buildRow([
+                const Text('Individual custom dot'),
+                DotsIndicator(
+                  dotsCount: _totalDots,
+                  position: _currentPosition,
+                  decorator: DotsDecorator(
+                    colors: [
+                      Colors.red,
+                      Colors.blue,
+                      Colors.green,
+                      Colors.yellow,
+                      Colors.cyan,
+                    ].reversed.toList(),
+                    activeColors: [
+                      Colors.red,
+                      Colors.blue,
+                      Colors.green,
+                      Colors.yellow,
+                      Colors.cyan,
+                    ],
+                    sizes: [
+                      Size.square(40.0),
+                      Size.square(35.0),
+                      Size.square(30.0),
+                      Size.square(25.0),
+                      Size.square(20.0),
+                    ],
+                    activeSizes: [
+                      Size.square(20.0),
+                      Size.square(25.0),
+                      Size.square(30.0),
+                      Size.square(35.0),
+                      Size.square(40.0),
+                    ],
+                    shapes: [
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)),
+                    ],
+                    activeShapes: [
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)),
+                    ],
+                  ),
+                ),
+              ]),
+              _buildRow([
+                const Text('Reversed'),
                 DotsIndicator(
                   dotsCount: _totalDots,
                   position: _currentPosition,
