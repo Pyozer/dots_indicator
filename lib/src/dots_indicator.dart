@@ -73,7 +73,7 @@ class DotsIndicator extends StatelessWidget {
     );
   }
 
-  Widget _buildDot(int index) {
+  Widget _buildDot(BuildContext context, int index) {
     final lerpValue = min(1.0, (position - index).abs());
 
     final size = Size.lerp(
@@ -88,7 +88,7 @@ class DotsIndicator extends StatelessWidget {
       margin: decorator.spacing,
       decoration: ShapeDecoration(
         color: Color.lerp(
-          decorator.getActiveColor(index),
+          decorator.getActiveColor(index) ?? Theme.of(context).primaryColor,
           decorator.getColor(index),
           lerpValue,
         ),
@@ -104,7 +104,10 @@ class DotsIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dotsList = List<Widget>.generate(dotsCount, _buildDot);
+    final dotsList = List<Widget>.generate(
+      dotsCount,
+      (i) => _buildDot(context, i),
+    );
     final dots = reversed ? dotsList.reversed.toList() : dotsList;
 
     return axis == Axis.vertical

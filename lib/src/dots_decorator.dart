@@ -18,8 +18,8 @@ class DotsDecorator {
 
   /// Active dot color
   ///
-  /// @Default `Colors.lightBlue`
-  final Color activeColor;
+  /// @Default `Theme.of(context).primaryColor`
+  final Color? activeColor;
 
   /// List of active dot colors
   /// One color by dot
@@ -79,7 +79,7 @@ class DotsDecorator {
   const DotsDecorator({
     this.color = Colors.grey,
     this.colors = const [],
-    this.activeColor = Colors.lightBlue,
+    this.activeColor,
     this.activeColors = const [],
     this.size = kDefaultSize,
     this.sizes = const [],
@@ -92,7 +92,7 @@ class DotsDecorator {
     this.spacing = kDefaultSpacing,
   });
 
-  Color getActiveColor(int index) {
+  Color? getActiveColor(int index) {
     return activeColors.isNotEmpty ? activeColors[index] : activeColor;
   }
 
