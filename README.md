@@ -8,12 +8,12 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^2.0.0
+  dots_indicator: ^2.1.0
 ```
 
 ## Example
 
-In these example, `pageLength` is the total of dots to display and `currentIndexPage` is the position to hightlight (the active dot).
+In these examples, `pageLength` is the total of dots to display and `currentIndexPage` is the position to hightlight (the active dot).
 
 ### A simple dots indicator
 
@@ -22,8 +22,8 @@ In these example, `pageLength` is the total of dots to display and `currentIndex
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage
-)
+  position: currentIndexPage,
+);
 ```
 
 ### Custom colors
@@ -38,14 +38,34 @@ new DotsIndicator(
     color: Colors.black87, // Inactive color
     activeColor: Colors.redAccent,
   ),
-)
+);
 ```
 
-### Custom size
+### Use specific color for each dot
 
-You can change the default size of dots.<br />
-So you can choose to have dots for no active positions and a rounded rectangle for active position for example.<br />
-**By default, the shape of dots is CircleBorder, so to have a rounded rectangle for active, you need to change `activeShape`**
+You can choose to have one color for inactive dots and one color the active dot.
+
+But you can also define one color by inactive dots (`colors`) and one color by active dot (`activeColors`).
+
+If you have a total of 3 dots, you must provide an array of 3 colors.
+
+```dart
+new DotsIndicator(
+  dotsCount: pageLength,
+  position: currentIndexPage,
+  decorator: DotsDecorator(
+    colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+    activeColors: [Colors.red[300], Colors.red[600], Colors.red[900]], // Àctive dot colors
+  ),
+);
+```
+
+### Custom size and shape
+
+You can change the default size of dots and also shape.
+
+So you can choose to have a shape for inactive dots and another shape for the active dot for example.<br />
+**By default, the shape of dots are CircleBorder, so to have a rounded rectangle for active one, you need to change `activeShape`**
 
 ![Custom dots size](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_size.gif)
 
@@ -58,12 +78,38 @@ new DotsIndicator(
     activeSize: const Size(18.0, 9.0),
     activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
   ),
-)
+);
+```
+
+### Custom size for each dot
+
+You can customize the size of each dot, for inactive and/or active dots.
+
+For that, use `sizes` and/or `activeSizes` params.
+
+```dart
+new DotsIndicator(
+  dotsCount: pageLength,
+  position: currentIndexPage,
+  decorator: DotsDecorator(
+    sizes: [
+      const Size.square(10.0),
+      const Size.square(15.0),
+      const Size.square(20.0),
+    ],
+    activeSizes: [
+      const Size.square(25.0),
+      const Size.square(25.0),
+      const Size.square(35.0),
+    ],
+  ),
+);
 ```
 
 ### Custom shape
 
-You can change the default shape of dots. By default it's a CircleBorder.<br />
+You can change the default shape of dots. By default it's a CircleBorder.
+
 You can change the no active and active dot shape.
 
 ![Custom dots shape](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_shape.gif)
@@ -76,7 +122,31 @@ new DotsIndicator(
     shape: const Border(),
     activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
   ),
-)
+);
+```
+### Custom shape for each dot
+
+You can customize the shape of each dot, for inactive and/or active dots.
+
+For that, use `shapes` and/or `activeShapes` params.
+
+```dart
+new DotsIndicator(
+  dotsCount: pageLength,
+  position: currentIndexPage,
+  decorator: DotsDecorator(
+    shapes: [
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+    ],
+    activeShapes: [
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+    ],
+  ),
+);
 ```
 
 ### Change the space between dots
@@ -93,7 +163,7 @@ new DotsIndicator(
   decorator: DotsDecorator(
     spacing: const EdgeInsets.all(10.0),
   ),
-)
+);
 ```
 
 ### Axis and reverse property

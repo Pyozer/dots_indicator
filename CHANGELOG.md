@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.1.0
+
+* Add specific color for each dot, colors/activeColors params added (Thanks to [PR#7](https://github.com/Pyozer/dots_indicator/pull/7))
+* Add specific size for each dot, sizes/activeSizes params added
+* Add specific shape for each dot, shapes/activeShapes params added
+* Replace default light blue for active color, by the theme primary color (Thanks to [Issue#20](https://github.com/Pyozer/dots_indicator/issues/20))
+* Update example app
+
 ## 2.0.0
 
 * Add null-safety support (Thanks to [PR#15](https://github.com/Pyozer/dots_indicator/pull/15))
