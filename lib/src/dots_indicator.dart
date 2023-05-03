@@ -1,16 +1,14 @@
 library dots_indicator;
 
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:dots_indicator/src/dots_decorator.dart';
 import 'package:flutter/material.dart';
 
-typedef void OnTap(double position);
+typedef void OnTap(int position);
 
 class DotsIndicator extends StatelessWidget {
-  final int dotsCount;
-  final double position;
+  final int dotsCount,position;
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
@@ -21,7 +19,7 @@ class DotsIndicator extends StatelessWidget {
   DotsIndicator({
     Key? key,
     required this.dotsCount,
-    this.position = 0.0,
+    this.position = 0,
     this.decorator = const DotsDecorator(),
     this.axis = Axis.horizontal,
     this.reversed = false,
@@ -68,13 +66,13 @@ class DotsIndicator extends StatelessWidget {
       customBorder: position == index
           ? decorator.getActiveShape(index)
           : decorator.getShape(index),
-      onTap: () => onTap!(index.toDouble()),
+      onTap: () => onTap!(index),
       child: dot,
     );
   }
 
   Widget _buildDot(BuildContext context, int index) {
-    final lerpValue = min(1.0, (position - index).abs());
+    final double lerpValue = min(1, (position - index).abs()).toDouble();
 
     final size = Size.lerp(
       decorator.getActiveSize(index),
