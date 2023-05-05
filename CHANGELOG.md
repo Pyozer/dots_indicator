@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.1.1
+* Changed position to int + fixed sample (Thanks to [PR#24](https://github.com/Pyozer/dots_indicator/pull/24)
+
 ## 2.1.0
 
 * Add specific color for each dot, colors/activeColors params added (Thanks to [PR#7](https://github.com/Pyozer/dots_indicator/pull/7))
