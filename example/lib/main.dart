@@ -12,15 +12,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _totalDots = 5;
-  double _currentPosition = 0.0;
+  int _currentPosition = 0;
 
-  double _validPosition(double position) {
+  int _validPosition(int position) {
     if (position >= _totalDots) return 0;
-    if (position < 0) return _totalDots - 1.0;
+    if (position < 0) return _totalDots - 1;
     return position;
   }
 
-  void _updatePosition(double position) {
+  void _updatePosition(int position) {
     setState(() => _currentPosition = _validPosition(position));
   }
 
@@ -74,26 +74,27 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(
                   width: 300.0,
                   child: Slider(
-                  value: _currentPosition,
-                  max: (_totalDots - 1).toDouble(),
-                  onChanged: _updatePosition,
-                ),),
+                    value: _currentPosition.toDouble(),
+                    max: (_totalDots - 1).toDouble(),
+                    onChanged: (val) {
+                      _updatePosition(val.round());
+                    },
+                  ),
+                ),
               ]),
               _buildRow([
                 FloatingActionButton(
                   child: const Icon(Icons.remove),
                   onPressed: () {
-                    _currentPosition = _currentPosition.ceilToDouble();
                     _updatePosition(max(--_currentPosition, 0));
                   },
                 ),
                 FloatingActionButton(
                   child: const Icon(Icons.add),
                   onPressed: () {
-                    _currentPosition = _currentPosition.floorToDouble();
                     _updatePosition(min(
                       ++_currentPosition,
-                      _totalDots.toDouble(),
+                      _totalDots,
                     ));
                   },
                 )
