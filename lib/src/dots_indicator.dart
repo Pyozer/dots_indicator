@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 typedef void OnTap(int position);
 
 class DotsIndicator extends StatelessWidget {
-  final int dotsCount,position;
+  final int dotsCount, position;
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
@@ -95,6 +95,7 @@ class DotsIndicator extends StatelessWidget {
           decorator.getShape(index),
           lerpValue,
         )!,
+        shadows: decorator.shadows,
       ),
     );
     return onTap == null ? dot : _wrapInkwell(dot, index);
