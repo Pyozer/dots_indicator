@@ -76,6 +76,11 @@ class DotsDecorator {
   /// @Default `EdgeInsets.all(6.0)`
   final EdgeInsets spacing;
 
+  /// Shadows of the dots
+  ///
+  /// @Default `null`
+  final List<BoxShadow>? shadows;
+
   const DotsDecorator({
     this.color = Colors.grey,
     this.colors = const [],
@@ -90,6 +95,7 @@ class DotsDecorator {
     this.activeShape = kDefaultShape,
     this.activeShapes = const [],
     this.spacing = kDefaultSpacing,
+    this.shadows,
   });
 
   Color? getActiveColor(int index) {
@@ -114,5 +120,9 @@ class DotsDecorator {
 
   ShapeBorder getShape(int index) {
     return shapes.isNotEmpty ? shapes[index] : shape;
+  }
+
+  List<BoxShadow>? getShadows(int index) {
+    return shadows;
   }
 }
