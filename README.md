@@ -20,7 +20,7 @@ In these examples, `pageLength` is the total of dots to display and `currentInde
 ![Simple dots](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/normal.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
 );
@@ -31,7 +31,7 @@ new DotsIndicator(
 ![Custom dots colors](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_color.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
@@ -50,7 +50,7 @@ But you can also define one color by inactive dots (`colors`) and one color by a
 If you have a total of 3 dots, you must provide an array of 3 colors.
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
@@ -70,7 +70,7 @@ So you can choose to have a shape for inactive dots and another shape for the ac
 ![Custom dots size](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_size.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
@@ -88,7 +88,7 @@ You can customize the size of each dot, for inactive and/or active dots.
 For that, use `sizes` and/or `activeSizes` params.
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
@@ -115,7 +115,7 @@ You can change the no active and active dot shape.
 ![Custom dots shape](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_shape.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
@@ -131,7 +131,7 @@ You can customize the shape of each dot, for inactive and/or active dots.
 For that, use `shapes` and/or `activeShapes` params.
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
@@ -157,7 +157,7 @@ But if you want you can change it, for example to increase the space between dot
 ![Custom dots space](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_space.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentIndexPage,
   decorator: DotsDecorator(
