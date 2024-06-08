@@ -5,10 +5,16 @@ import 'dart:math';
 import 'package:dots_indicator/src/dots_decorator.dart';
 import 'package:flutter/material.dart';
 
-typedef void OnTap(int position);
+typedef OnTap = void Function(int position);
 
 class DotsIndicator extends StatelessWidget {
   final int dotsCount, position;
+
+  /// If true, the last dot will fade out when the position is at the last dot.
+  final bool fadeOutLastDot;
+
+  /// Distance from currently selected dot to the one that fades out.
+  final int fadeOutDistance;
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;
@@ -16,8 +22,14 @@ class DotsIndicator extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final MainAxisAlignment mainAxisAlignment;
 
+  /// If true, the dots will animate when the position changes.
+  final bool animate;
+
+  /// Duration of the animation when the position changes.
+  final Duration animationDuration;
+
   DotsIndicator({
-    Key? key,
+    super.key,
     required this.dotsCount,
     this.position = 0,
     this.decorator = const DotsDecorator(),
@@ -26,6 +38,10 @@ class DotsIndicator extends StatelessWidget {
     this.mainAxisSize = MainAxisSize.min,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.onTap,
+    this.fadeOutLastDot = false,
+    this.fadeOutDistance = 0,
+    this.animate = false,
+    this.animationDuration = const Duration(milliseconds: 200),
   })  : assert(dotsCount > 0, 'dotsCount must be superior to zero'),
         assert(position >= 0, 'position must be superior or equals to zero'),
         assert(
@@ -59,7 +75,14 @@ class DotsIndicator extends StatelessWidget {
               decorator.activeShapes.length == dotsCount,
           "activeShapes param in decorator must empty or have same length as dotsCount parameter",
         ),
-        super(key: key);
+        assert(
+          fadeOutLastDot == false || fadeOutDistance > 0,
+          "fadeOutDistace must be superior to zero when fadeOutLastDot is true",
+        ),
+        assert(
+          fadeOutDistance < dotsCount,
+          "fadeOutDistace must be inferior to dotsCount",
+        );
 
   Widget _wrapInkwell(Widget dot, int index) {
     return InkWell(
@@ -72,30 +95,66 @@ class DotsIndicator extends StatelessWidget {
   }
 
   Widget _buildDot(BuildContext context, int index) {
-    final double lerpValue = min(1, (position - index).abs()).toDouble();
+    final int absPositionIndexRelation = (position - index).abs();
+    final bool isCurrentlyVisible = absPositionIndexRelation <= fadeOutDistance;
 
-    final size = Size.lerp(
+    final double lerpValue = min(1, absPositionIndexRelation).toDouble();
+
+    Size size = Size.lerp(
       decorator.getActiveSize(index),
       decorator.getSize(index),
       lerpValue,
     )!;
 
+    if (fadeOutLastDot && absPositionIndexRelation >= fadeOutDistance) {
+      size = Size.lerp(
+        decorator.getSize(index),
+        decorator.getFadeOutSize(index),
+        absPositionIndexRelation == fadeOutDistance ? 1 : 0.0,
+      )!;
+    }
+
     final dot = Container(
-      width: size.width,
-      height: size.height,
-      margin: decorator.spacing,
-      decoration: ShapeDecoration(
-        color: Color.lerp(
-          decorator.getActiveColor(index) ?? Theme.of(context).primaryColor,
-          decorator.getColor(index),
-          lerpValue,
+      height: fadeOutLastDot && isCurrentlyVisible
+          ? max(
+                max(decorator.getActiveSize(index).height,
+                    decorator.getSize(index).height),
+                decorator.getFadeOutSize(index).height,
+              ) +
+              (axis == Axis.horizontal
+                  ? decorator.spacing.vertical
+                  : decorator.spacing.horizontal)
+          : null,
+      child: Center(
+        child: AnimatedOpacity(
+          duration: animate ? animationDuration : Duration.zero,
+          opacity:
+              !fadeOutLastDot || absPositionIndexRelation <= fadeOutDistance
+                  ? 1.0
+                  : 0.0,
+          child: AnimatedContainer(
+            duration: animate ? animationDuration : Duration.zero,
+            width: size.width,
+            height: size.height,
+            margin: fadeOutLastDot && !isCurrentlyVisible
+                ? EdgeInsets.all(0)
+                : decorator.spacing,
+            decoration: ShapeDecoration(
+              color: Color.lerp(
+                decorator.getActiveColor(index) ??
+                    Theme.of(context).primaryColor,
+                decorator.getColor(index),
+                lerpValue,
+              ),
+              shape: ShapeBorder.lerp(
+                decorator.getActiveShape(index),
+                decorator.getShape(index),
+                lerpValue,
+              )!,
+              shadows: decorator.shadows,
+            ),
+          ),
         ),
-        shape: ShapeBorder.lerp(
-          decorator.getActiveShape(index),
-          decorator.getShape(index),
-          lerpValue,
-        )!,
-        shadows: decorator.shadows,
       ),
     );
     return onTap == null ? dot : _wrapInkwell(dot, index);

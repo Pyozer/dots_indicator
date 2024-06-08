@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   String getPrettyCurrPosition() {
-    return (_currentPosition + 1.0).toStringAsPrecision(3);
+    return (_currentPosition + 1).toString();
   }
 
   @override
@@ -200,6 +200,17 @@ class _MyAppState extends State<MyApp> {
                   position: _currentPosition,
                   reversed: true,
                   decorator: decorator,
+                ),
+              ]),
+              _buildRow([
+                const Text('Indefinite Pager Indicator'),
+                DotsIndicator(
+                  dotsCount: _totalDots,
+                  position: _currentPosition,
+                  decorator: decorator,
+                  fadeOutLastDot: true,
+                  fadeOutDistance: 2,
+                  animate: true,
                 ),
               ]),
             ],
