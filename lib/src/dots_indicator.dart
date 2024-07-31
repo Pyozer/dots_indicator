@@ -95,7 +95,11 @@ class DotsIndicator extends StatelessWidget {
           decorator.getShape(index),
           lerpValue,
         )!,
-        shadows: decorator.shadows,
+        shadows: BoxShadow.lerpList(
+          decorator.getActiveShadows(index),
+          decorator.getShadows(index),
+          lerpValue,
+        ),
       ),
     );
     return onTap == null ? dot : _wrapInkwell(dot, index);

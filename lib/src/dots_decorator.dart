@@ -81,6 +81,11 @@ class DotsDecorator {
   /// @Default `null`
   final List<BoxShadow>? shadows;
 
+  /// Shadows of the active dots
+  ///
+  /// @Default `shadows` or `null`
+  final List<BoxShadow>? activeShadows;
+
   const DotsDecorator({
     this.color = Colors.grey,
     this.colors = const [],
@@ -96,6 +101,7 @@ class DotsDecorator {
     this.activeShapes = const [],
     this.spacing = kDefaultSpacing,
     this.shadows,
+    this.activeShadows,
   });
 
   Color? getActiveColor(int index) {
@@ -124,5 +130,9 @@ class DotsDecorator {
 
   List<BoxShadow>? getShadows(int index) {
     return shadows;
+  }
+
+  List<BoxShadow>? getActiveShadows(int index) {
+    return activeShadows ?? shadows;
   }
 }
