@@ -8,12 +8,14 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^3.1.0
+  dots_indicator: ^4.0.0
 ```
 
 ## Example
 
-In these examples, `pageLength` is the total of dots to display and `currentIndexPage` is the position to hightlight (the active dot).
+In these examples, `pageLength` is the total of dots to display and `currentPage` is the position to hightlight (the active dot).
+
+For information, `currentPage` is a double, to be able to have lerp animation.
 
 ### A simple dots indicator
 
@@ -22,7 +24,7 @@ In these examples, `pageLength` is the total of dots to display and `currentInde
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
 );
 ```
 
@@ -33,7 +35,7 @@ new DotsIndicator(
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     color: Colors.black87, // Inactive color
     activeColor: Colors.redAccent,
@@ -52,7 +54,7 @@ If you have a total of 3 dots, you must provide an array of 3 colors.
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
     activeColors: [Colors.red[300], Colors.red[600], Colors.red[900]], // Àctive dot colors
@@ -72,7 +74,7 @@ So you can choose to have a shape for inactive dots and another shape for the ac
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     size: const Size.square(9.0),
     activeSize: const Size(18.0, 9.0),
@@ -90,7 +92,7 @@ For that, use `sizes` and/or `activeSizes` params.
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     sizes: [
       const Size.square(10.0),
@@ -117,7 +119,7 @@ You can change the no active and active dot shape.
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     shape: const Border(),
     activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -133,7 +135,7 @@ For that, use `shapes` and/or `activeShapes` params.
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     shapes: [
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -159,7 +161,7 @@ But if you want you can change it, for example to increase the space between dot
 ```dart
 new DotsIndicator(
   dotsCount: pageLength,
-  position: currentIndexPage,
+  position: currentPage,
   decorator: DotsDecorator(
     spacing: const EdgeInsets.all(10.0),
   ),

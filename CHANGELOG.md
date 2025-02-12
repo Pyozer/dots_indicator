@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 4.0.0
+
+**BREAKING CHANGE**
+* Change position from int to double, to be able to have lerp animation (like in 2.X.X versions)
+
 ## 3.1.0
 * Added shadows parameter to add a shadow to the dots (Thanks to [PR#24](https://github.com/Pyozer/dots_indicator/pull/26))
 * Add shadow property for active dots (Thanks to [PR#29](https://github.com/Pyozer/dots_indicator/pull/29))
