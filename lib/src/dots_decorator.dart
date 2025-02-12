@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Size kDefaultSize = Size.square(9.0);
+const Size kDefaultFadeOutSize = Size.square(6.0);
 const EdgeInsets kDefaultSpacing = EdgeInsets.all(6.0);
 const ShapeBorder kDefaultShape = CircleBorder();
 
@@ -37,6 +38,17 @@ class DotsDecorator {
   ///
   /// @Default `Value of size parameter applied to each dot`
   final List<Size> sizes;
+
+  /// Fade out dot size
+  ///
+  /// @Default `Size.square(6.0)`
+  final Size fadeOutSize;
+
+  /// List of fade out dot size
+  /// One size by dot
+  ///
+  /// @Default `Value of activeSize parameter applied to each dot`
+  final List<Size> fadeOutSizes;
 
   /// Active dot size
   ///
@@ -93,6 +105,8 @@ class DotsDecorator {
     this.activeColors = const [],
     this.size = kDefaultSize,
     this.sizes = const [],
+    this.fadeOutSize = kDefaultFadeOutSize,
+    this.fadeOutSizes = const [],
     this.activeSize = kDefaultSize,
     this.activeSizes = const [],
     this.shape = kDefaultShape,
@@ -110,6 +124,10 @@ class DotsDecorator {
 
   Color getColor(int index) {
     return colors.isNotEmpty ? colors[index] : color;
+  }
+
+  Size getFadeOutSize(int index) {
+    return fadeOutSizes.isNotEmpty ? fadeOutSizes[index] : fadeOutSize;
   }
 
   Size getActiveSize(int index) {
