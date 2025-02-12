@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## NEXT
-* Decimal places of the current position removed in the example
-* Updated compatible dart sdk version
-* Added animation parameters to animate changes in dot styling
-* Added parameter to allow for an indefinite pager indicator behavior
+## 3.1.0
+* Added shadows parameter to add a shadow to the dots (Thanks to [PR#24](https://github.com/Pyozer/dots_indicator/pull/26))
+* Add shadow property for active dots (Thanks to [PR#29](https://github.com/Pyozer/dots_indicator/pull/29))
+* Added parameter to allow for an indefinite pager indicator behavior (Thanks to [PR#28](https://github.com/Pyozer/dots_indicator/pull/28))
+* Regenerate example app
 
 ## 3.0.0
 * Changed position to int + fixed sample (Thanks to [PR#24](https://github.com/Pyozer/dots_indicator/pull/24))
