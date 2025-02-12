@@ -14,15 +14,15 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final _totalDots = 5;
-  int _currentPosition = 0;
+  double _currentPosition = 0.0;
 
-  int _validPosition(int position) {
-    if (position >= _totalDots) return 0;
-    if (position < 0) return _totalDots - 1;
+  double _validPosition(double position) {
+    if (position >= _totalDots) return 0.0;
+    if (position < 0.0) return _totalDots - 1;
     return position;
   }
 
-  void _updatePosition(int position) {
+  void _updatePosition(double position) {
     setState(() => _currentPosition = _validPosition(position));
   }
 
@@ -37,7 +37,7 @@ class MyAppState extends State<MyApp> {
   }
 
   String getPrettyCurrPosition() {
-    return (_currentPosition + 1).toString();
+    return (_currentPosition + 1).toStringAsFixed(2);
   }
 
   @override
@@ -76,11 +76,9 @@ class MyAppState extends State<MyApp> {
                 SizedBox(
                   width: 300.0,
                   child: Slider(
-                    value: _currentPosition.toDouble(),
+                    value: _currentPosition,
                     max: (_totalDots - 1).toDouble(),
-                    onChanged: (val) {
-                      _updatePosition(val.round());
-                    },
+                    onChanged: _updatePosition,
                   ),
                 ),
               ]),
@@ -88,15 +86,17 @@ class MyAppState extends State<MyApp> {
                 FloatingActionButton(
                   child: const Icon(Icons.remove),
                   onPressed: () {
-                    _updatePosition(max(--_currentPosition, 0));
+                    _currentPosition = _currentPosition.ceilToDouble();
+                    _updatePosition(max(--_currentPosition, 0.0));
                   },
                 ),
                 FloatingActionButton(
                   child: const Icon(Icons.add),
                   onPressed: () {
+                    _currentPosition = _currentPosition.floorToDouble();
                     _updatePosition(min(
                       ++_currentPosition,
-                      _totalDots,
+                      _totalDots.toDouble(),
                     ));
                   },
                 )
@@ -112,7 +112,7 @@ class MyAppState extends State<MyApp> {
                       axis: Axis.vertical,
                       decorator: decorator,
                       onTap: (pos) {
-                        setState(() => _currentPosition = pos);
+                        setState(() => _currentPosition = pos.toDouble());
                       },
                     ),
                   ],

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 typedef OnTap = void Function(int position);
 
 class DotsIndicator extends StatelessWidget {
-  final int dotsCount, position;
+  final int dotsCount;
+  final double position;
 
   /// If true, the last dot will fade out when the position is at the last dot.
   final bool fadeOutLastDot;
@@ -31,7 +32,7 @@ class DotsIndicator extends StatelessWidget {
   DotsIndicator({
     super.key,
     required this.dotsCount,
-    this.position = 0,
+    this.position = 0.0,
     this.decorator = const DotsDecorator(),
     this.axis = Axis.horizontal,
     this.reversed = false,
@@ -43,7 +44,7 @@ class DotsIndicator extends StatelessWidget {
     this.animate = false,
     this.animationDuration = const Duration(milliseconds: 200),
   })  : assert(dotsCount > 0, 'dotsCount must be superior to zero'),
-        assert(position >= 0, 'position must be superior or equals to zero'),
+        assert(position >= 0.0, 'position must be superior or equals to zero'),
         assert(
           position < dotsCount,
           "position must be less than dotsCount",
@@ -95,10 +96,10 @@ class DotsIndicator extends StatelessWidget {
   }
 
   Widget _buildDot(BuildContext context, int index) {
-    final int absPositionIndexRelation = (position - index).abs();
+    final double absPositionIndexRelation = (position - index).abs();
     final bool isCurrentlyVisible = absPositionIndexRelation <= fadeOutDistance;
 
-    final double lerpValue = min(1, absPositionIndexRelation).toDouble();
+    final double lerpValue = min(1.0, absPositionIndexRelation).toDouble();
 
     Size size = Size.lerp(
       decorator.getActiveSize(index),
