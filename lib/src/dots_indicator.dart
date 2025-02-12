@@ -141,8 +141,7 @@ class DotsIndicator extends StatelessWidget {
                 : decorator.spacing,
             decoration: ShapeDecoration(
               color: Color.lerp(
-                decorator.getActiveColor(index) ??
-                    Theme.of(context).primaryColor,
+                decorator.getActiveColor(index) ?? Theme.of(context).primaryColor,
                 decorator.getColor(index),
                 lerpValue,
               ),
@@ -151,7 +150,11 @@ class DotsIndicator extends StatelessWidget {
                 decorator.getShape(index),
                 lerpValue,
               )!,
-              shadows: decorator.shadows,
+              shadows: BoxShadow.lerpList(
+                decorator.getActiveShadows(index),
+                decorator.getShadows(index),
+                lerpValue,
+              ),
             ),
           ),
         ),
