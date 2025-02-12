@@ -1,10 +1,10 @@
 name: dots_indicator_example
-description: Demonstrates how to use the dots_indicator plugin.
-version: 1.0.0
+description: "Demonstrates how to use the dots_indicator package"
 publish_to: 'none'
+version: 1.0.0
 
 environment:
-  sdk: ">=2.12.0 <4.0.0"
+  sdk: ^3.6.2
 
 dependencies:
   flutter:
@@ -12,6 +12,9 @@ dependencies:
 
   dots_indicator:
     path: ../
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
