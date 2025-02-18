@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.1
+
+* Reduce min sdk of example app
+
 ## 4.0.0
 
 **BREAKING CHANGE**
