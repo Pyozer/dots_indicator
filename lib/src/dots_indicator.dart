@@ -29,6 +29,8 @@ class DotsIndicator extends StatelessWidget {
   /// Duration of the animation when the position changes.
   final Duration animationDuration;
 
+  final bool activePreviousDot;
+
   DotsIndicator({
     super.key,
     required this.dotsCount,
@@ -43,6 +45,7 @@ class DotsIndicator extends StatelessWidget {
     this.fadeOutDistance = 0,
     this.animate = false,
     this.animationDuration = const Duration(milliseconds: 200),
+    this.activePreviousDot = false,
   })  : assert(dotsCount > 0, 'dotsCount must be superior to zero'),
         assert(position >= 0.0, 'position must be superior or equals to zero'),
         assert(
@@ -99,7 +102,9 @@ class DotsIndicator extends StatelessWidget {
     final double absPositionIndexRelation = (position - index).abs();
     final bool isCurrentlyVisible = absPositionIndexRelation <= fadeOutDistance;
 
-    final double lerpValue = min(1.0, absPositionIndexRelation).toDouble();
+    final double lerpValue = activePreviousDot && index <= position
+        ? 0.0 // Set lerpValue to 0 for active state
+        : min(1.0, absPositionIndexRelation).toDouble();
 
     Size size = Size.lerp(
       decorator.getActiveSize(index),
@@ -142,7 +147,8 @@ class DotsIndicator extends StatelessWidget {
                 : decorator.spacing,
             decoration: ShapeDecoration(
               color: Color.lerp(
-                decorator.getActiveColor(index) ?? Theme.of(context).primaryColor,
+                decorator.getActiveColor(index) ??
+                    Theme.of(context).primaryColor,
                 decorator.getColor(index),
                 lerpValue,
               ),

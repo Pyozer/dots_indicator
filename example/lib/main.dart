@@ -215,6 +215,15 @@ class MyAppState extends State<MyApp> {
                   animate: true,
                 ),
               ]),
+              _buildRow([
+                const Text('Active Previous Dot'),
+                DotsIndicator(
+                  dotsCount: _totalDots,
+                  position: _currentPosition,
+                  activePreviousDot: true,
+                  decorator: decorator,
+                ),
+              ]),
             ],
           ),
         ),
