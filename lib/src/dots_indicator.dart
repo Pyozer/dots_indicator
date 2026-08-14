@@ -3,7 +3,7 @@ library dots_indicator;
 import 'dart:math';
 
 import 'package:dots_indicator/src/dots_decorator.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 typedef OnTap = void Function(int position);
 

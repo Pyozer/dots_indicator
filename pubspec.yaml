@@ -4,9 +4,11 @@ version: 4.0.1
 homepage: https://github.com/pyozer/dots_indicator
 
 environment:
-  sdk: '>=2.17.0 <4.0.0'
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
 
 dependencies:
+  material_ui: ^1.0.0
   flutter:
     sdk: flutter
 
