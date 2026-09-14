@@ -1,4 +1,4 @@
-library dots_indicator;
+library;
 
 import 'dart:math';
 
