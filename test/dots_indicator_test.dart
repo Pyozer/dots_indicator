@@ -48,14 +48,19 @@ void main() {
     );
   });
 
-  test('throws when colors length does not match dotsCount', () {
-    expect(
-      () => DotsIndicator(
-        dotsCount: 3,
-        position: 0,
-        decorator: const DotsDecorator(colors: [Colors.red, Colors.blue]),
+  testWidgets('throws when colors length does not match dotsCount', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      wrap(
+        DotsIndicator(
+          dotsCount: 3,
+          position: 0,
+          decorator: const DotsDecorator(colors: [Colors.red, Colors.blue]),
+        ),
       ),
-      throwsAssertionError,
     );
+
+    expect(tester.takeException(), isAssertionError);
   });
 }

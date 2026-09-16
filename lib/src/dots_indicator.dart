@@ -29,7 +29,7 @@ class DotsIndicator extends StatelessWidget {
   /// Duration of the animation when the position changes.
   final Duration animationDuration;
 
-  DotsIndicator({
+  const DotsIndicator({
     super.key,
     required this.dotsCount,
     this.position = 0.0,
@@ -47,33 +47,6 @@ class DotsIndicator extends StatelessWidget {
        assert(position >= 0.0, 'position must be superior or equals to zero'),
        assert(position < dotsCount, "position must be less than dotsCount"),
        assert(
-         decorator.colors.isEmpty || decorator.colors.length == dotsCount,
-         "colors param in decorator must empty or have same length as dotsCount parameter",
-       ),
-       assert(
-         decorator.activeColors.isEmpty ||
-             decorator.activeColors.length == dotsCount,
-         "activeColors param in decorator must empty or have same length as dotsCount parameter",
-       ),
-       assert(
-         decorator.sizes.isEmpty || decorator.sizes.length == dotsCount,
-         "sizes param in decorator must empty or have same length as dotsCount parameter",
-       ),
-       assert(
-         decorator.activeSizes.isEmpty ||
-             decorator.activeSizes.length == dotsCount,
-         "activeSizes param in decorator must empty or have same length as dotsCount parameter",
-       ),
-       assert(
-         decorator.shapes.isEmpty || decorator.shapes.length == dotsCount,
-         "shapes param in decorator must empty or have same length as dotsCount parameter",
-       ),
-       assert(
-         decorator.activeShapes.isEmpty ||
-             decorator.activeShapes.length == dotsCount,
-         "activeShapes param in decorator must empty or have same length as dotsCount parameter",
-       ),
-       assert(
          fadeOutLastDot == false || fadeOutDistance > 0,
          "fadeOutDistace must be superior to zero when fadeOutLastDot is true",
        ),
@@ -81,6 +54,38 @@ class DotsIndicator extends StatelessWidget {
          fadeOutDistance < dotsCount,
          "fadeOutDistace must be inferior to dotsCount",
        );
+
+  // These checks depend on `decorator`, a non-constant field, so they can't
+  // live in the const constructor's initializer list; they run here instead.
+  void _assertDecoratorConsistency() {
+    assert(
+      decorator.colors.isEmpty || decorator.colors.length == dotsCount,
+      "colors param in decorator must empty or have same length as dotsCount parameter",
+    );
+    assert(
+      decorator.activeColors.isEmpty ||
+          decorator.activeColors.length == dotsCount,
+      "activeColors param in decorator must empty or have same length as dotsCount parameter",
+    );
+    assert(
+      decorator.sizes.isEmpty || decorator.sizes.length == dotsCount,
+      "sizes param in decorator must empty or have same length as dotsCount parameter",
+    );
+    assert(
+      decorator.activeSizes.isEmpty ||
+          decorator.activeSizes.length == dotsCount,
+      "activeSizes param in decorator must empty or have same length as dotsCount parameter",
+    );
+    assert(
+      decorator.shapes.isEmpty || decorator.shapes.length == dotsCount,
+      "shapes param in decorator must empty or have same length as dotsCount parameter",
+    );
+    assert(
+      decorator.activeShapes.isEmpty ||
+          decorator.activeShapes.length == dotsCount,
+      "activeShapes param in decorator must empty or have same length as dotsCount parameter",
+    );
+  }
 
   Widget _wrapInkwell(Widget dot, int index) {
     return InkWell(
@@ -166,6 +171,8 @@ class DotsIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _assertDecoratorConsistency();
+
     final dotsList = List<Widget>.generate(
       dotsCount,
       (i) => _buildDot(context, i),
