@@ -1,14 +1,18 @@
 # CHANGELOG
 
-## Unreleased
+## 5.0.0
 
-* Migrated from `package:flutter/material.dart` to the standalone
-  [`material_ui`](https://pub.dev/packages/material_ui) package. Material was
-  decoupled from the Flutter SDK in 3.47; the in-SDK copy is frozen to
-  contributions and scheduled for removal. Thanks to
-  [@StrangeTechDev](https://github.com/StrangeTechDev) for the migration.
-* Minimum SDK raised to Dart 3.12 / Flutter 3.44, which is what `material_ui`
-  requires.
+* **BREAKING:** Use the standalone [`material_ui`](https://pub.dev/packages/material_ui)
+  package instead of `package:flutter/material.dart`. Requires Flutter
+  `>=3.44.0` and Dart `^3.12.0`. Migration by
+  [@StrangeTechDev](https://github.com/StrangeTechDev) in [#31](https://github.com/Pyozer/dots_indicator/pull/31).
+
+* `DotsIndicator`'s constructor is now `const`.
+* Switched the analyzer config to `flutter_lints` (was `lints/recommended`,
+  unused despite being a declared dependency).
+* Added a CI workflow running `flutter analyze`, `dart format` and
+  `flutter test` on every push/PR.
+* Added a first widget test suite for `DotsIndicator`.
 
 ## 4.0.1
 
