@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() => runApp(MyApp());
 

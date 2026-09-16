@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const Size kDefaultSize = Size.square(9.0);
 const Size kDefaultFadeOutSize = Size.square(6.0);

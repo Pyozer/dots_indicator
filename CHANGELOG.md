@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Unreleased
+
+* Migrated from `package:flutter/material.dart` to the standalone
+  [`material_ui`](https://pub.dev/packages/material_ui) package. Material was
+  decoupled from the Flutter SDK in 3.47; the in-SDK copy is frozen to
+  contributions and scheduled for removal. Thanks to
+  [@StrangeTechDev](https://github.com/StrangeTechDev) for the migration.
+* Minimum SDK raised to Dart 3.12 / Flutter 3.44, which is what `material_ui`
+  requires.
+
 ## 4.0.1
 
 * Reduce min sdk of example app
