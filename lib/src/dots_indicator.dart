@@ -43,47 +43,44 @@ class DotsIndicator extends StatelessWidget {
     this.fadeOutDistance = 0,
     this.animate = false,
     this.animationDuration = const Duration(milliseconds: 200),
-  })  : assert(dotsCount > 0, 'dotsCount must be superior to zero'),
-        assert(position >= 0.0, 'position must be superior or equals to zero'),
-        assert(
-          position < dotsCount,
-          "position must be less than dotsCount",
-        ),
-        assert(
-          decorator.colors.isEmpty || decorator.colors.length == dotsCount,
-          "colors param in decorator must empty or have same length as dotsCount parameter",
-        ),
-        assert(
-          decorator.activeColors.isEmpty ||
-              decorator.activeColors.length == dotsCount,
-          "activeColors param in decorator must empty or have same length as dotsCount parameter",
-        ),
-        assert(
-          decorator.sizes.isEmpty || decorator.sizes.length == dotsCount,
-          "sizes param in decorator must empty or have same length as dotsCount parameter",
-        ),
-        assert(
-          decorator.activeSizes.isEmpty ||
-              decorator.activeSizes.length == dotsCount,
-          "activeSizes param in decorator must empty or have same length as dotsCount parameter",
-        ),
-        assert(
-          decorator.shapes.isEmpty || decorator.shapes.length == dotsCount,
-          "shapes param in decorator must empty or have same length as dotsCount parameter",
-        ),
-        assert(
-          decorator.activeShapes.isEmpty ||
-              decorator.activeShapes.length == dotsCount,
-          "activeShapes param in decorator must empty or have same length as dotsCount parameter",
-        ),
-        assert(
-          fadeOutLastDot == false || fadeOutDistance > 0,
-          "fadeOutDistace must be superior to zero when fadeOutLastDot is true",
-        ),
-        assert(
-          fadeOutDistance < dotsCount,
-          "fadeOutDistace must be inferior to dotsCount",
-        );
+  }) : assert(dotsCount > 0, 'dotsCount must be superior to zero'),
+       assert(position >= 0.0, 'position must be superior or equals to zero'),
+       assert(position < dotsCount, "position must be less than dotsCount"),
+       assert(
+         decorator.colors.isEmpty || decorator.colors.length == dotsCount,
+         "colors param in decorator must empty or have same length as dotsCount parameter",
+       ),
+       assert(
+         decorator.activeColors.isEmpty ||
+             decorator.activeColors.length == dotsCount,
+         "activeColors param in decorator must empty or have same length as dotsCount parameter",
+       ),
+       assert(
+         decorator.sizes.isEmpty || decorator.sizes.length == dotsCount,
+         "sizes param in decorator must empty or have same length as dotsCount parameter",
+       ),
+       assert(
+         decorator.activeSizes.isEmpty ||
+             decorator.activeSizes.length == dotsCount,
+         "activeSizes param in decorator must empty or have same length as dotsCount parameter",
+       ),
+       assert(
+         decorator.shapes.isEmpty || decorator.shapes.length == dotsCount,
+         "shapes param in decorator must empty or have same length as dotsCount parameter",
+       ),
+       assert(
+         decorator.activeShapes.isEmpty ||
+             decorator.activeShapes.length == dotsCount,
+         "activeShapes param in decorator must empty or have same length as dotsCount parameter",
+       ),
+       assert(
+         fadeOutLastDot == false || fadeOutDistance > 0,
+         "fadeOutDistace must be superior to zero when fadeOutLastDot is true",
+       ),
+       assert(
+         fadeOutDistance < dotsCount,
+         "fadeOutDistace must be inferior to dotsCount",
+       );
 
   Widget _wrapInkwell(Widget dot, int index) {
     return InkWell(
@@ -115,24 +112,26 @@ class DotsIndicator extends StatelessWidget {
       )!;
     }
 
-    final dot = Container(
+    final dot = SizedBox(
       height: fadeOutLastDot && isCurrentlyVisible
           ? max(
-                max(decorator.getActiveSize(index).height,
-                    decorator.getSize(index).height),
-                decorator.getFadeOutSize(index).height,
-              ) +
-              (axis == Axis.horizontal
-                  ? decorator.spacing.vertical
-                  : decorator.spacing.horizontal)
+                  max(
+                    decorator.getActiveSize(index).height,
+                    decorator.getSize(index).height,
+                  ),
+                  decorator.getFadeOutSize(index).height,
+                ) +
+                (axis == Axis.horizontal
+                    ? decorator.spacing.vertical
+                    : decorator.spacing.horizontal)
           : null,
       child: Center(
         child: AnimatedOpacity(
           duration: animate ? animationDuration : Duration.zero,
           opacity:
               !fadeOutLastDot || absPositionIndexRelation <= fadeOutDistance
-                  ? 1.0
-                  : 0.0,
+              ? 1.0
+              : 0.0,
           child: AnimatedContainer(
             duration: animate ? animationDuration : Duration.zero,
             width: size.width,
@@ -142,7 +141,8 @@ class DotsIndicator extends StatelessWidget {
                 : decorator.spacing,
             decoration: ShapeDecoration(
               color: Color.lerp(
-                decorator.getActiveColor(index) ?? Theme.of(context).primaryColor,
+                decorator.getActiveColor(index) ??
+                    Theme.of(context).primaryColor,
                 decorator.getColor(index),
                 lerpValue,
               ),

@@ -51,16 +51,11 @@ class MyAppState extends State<MyApp> {
       ),
     );
 
-    const titleStyle = TextStyle(
-      fontWeight: FontWeight.w700,
-      fontSize: 18.0,
-    );
+    const titleStyle = TextStyle(fontWeight: FontWeight.w700, fontSize: 18.0);
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Dots indicator example'),
-        ),
+        appBar: AppBar(title: const Text('Dots indicator example')),
         body: Center(
           child: ListView(
             shrinkWrap: true,
@@ -94,12 +89,11 @@ class MyAppState extends State<MyApp> {
                   child: const Icon(Icons.add),
                   onPressed: () {
                     _currentPosition = _currentPosition.floorToDouble();
-                    _updatePosition(min(
-                      ++_currentPosition,
-                      _totalDots.toDouble(),
-                    ));
+                    _updatePosition(
+                      min(++_currentPosition, _totalDots.toDouble()),
+                    );
                   },
-                )
+                ),
               ]),
               _buildRow([
                 Column(
@@ -131,9 +125,7 @@ class MyAppState extends State<MyApp> {
                   ],
                 ),
               ]),
-              _buildRow([
-                const Text('Horizontal', style: titleStyle),
-              ]),
+              _buildRow([const Text('Horizontal', style: titleStyle)]),
               _buildRow([
                 const Text('Individual custom dot'),
                 DotsIndicator(
@@ -170,27 +162,37 @@ class MyAppState extends State<MyApp> {
                     ],
                     shapes: [
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0)),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                     ],
                     activeShapes: [
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0)),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                     ],
                   ),
                 ),
