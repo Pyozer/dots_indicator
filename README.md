@@ -8,12 +8,72 @@ You just need to add `dots_indicator` as a [dependency in your pubspec.yaml file
 
 ```yaml
 dependencies:
-  dots_indicator: ^4.0.1
+  dots_indicator: ^5.0.0
 ```
+
+> **Breaking change in 5.0.0:** this package now uses the standalone
+> [`material_ui`](https://pub.dev/packages/material_ui) package instead of
+> `package:flutter/material.dart`. Your app must also use `material_ui` (or
+> keep the deprecated `MaterialUiCompatibilityBridge`), otherwise tapping a
+> dot (`onTap`) throws `No Material widget found`. Requires Flutter
+> `>=3.44.0` and Dart `^3.12.0`. See the [CHANGELOG](CHANGELOG.md) for
+> details.
+
+## Quick start
+
+The typical use case is to pair `DotsIndicator` with a `PageView`, syncing
+`position` to the controller's current page:
+
+```dart
+class MyPageView extends StatefulWidget {
+  const MyPageView({super.key});
+
+  @override
+  State<MyPageView> createState() => _MyPageViewState();
+}
+
+class _MyPageViewState extends State<MyPageView> {
+  final _pages = const [Page1(), Page2(), Page3()];
+  final _pageController = PageController();
+  double _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() => _currentPage = _pageController.page ?? 0);
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: PageView(controller: _pageController, children: _pages),
+        ),
+        DotsIndicator(
+          dotsCount: _pages.length,
+          position: _currentPage,
+        ),
+      ],
+    );
+  }
+}
+```
+
+You can also drive `DotsIndicator` manually (no `PageView`), or let it drive
+navigation itself with `onTap` — see below.
 
 ## Example
 
-In these examples, `pageLength` is the total of dots to display and `currentPage` is the position to hightlight (the active dot).
+In these examples, `pageLength` is the total of dots to display and `currentPage` is the position to highlight (the active dot).
 
 For information, `currentPage` is a double, to be able to have lerp animation.
 
@@ -22,7 +82,7 @@ For information, `currentPage` is a double, to be able to have lerp animation.
 ![Simple dots](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/normal.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
 );
@@ -33,7 +93,7 @@ new DotsIndicator(
 ![Custom dots colors](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_color.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -52,7 +112,7 @@ But you can also define one color by inactive dots (`colors`) and one color by a
 If you have a total of 3 dots, you must provide an array of 3 colors.
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -72,7 +132,7 @@ So you can choose to have a shape for inactive dots and another shape for the ac
 ![Custom dots size](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_size.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -90,7 +150,7 @@ You can customize the size of each dot, for inactive and/or active dots.
 For that, use `sizes` and/or `activeSizes` params.
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -117,7 +177,7 @@ You can change the no active and active dot shape.
 ![Custom dots shape](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_shape.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -133,7 +193,7 @@ You can customize the shape of each dot, for inactive and/or active dots.
 For that, use `shapes` and/or `activeShapes` params.
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -159,7 +219,7 @@ But if you want you can change it, for example to increase the space between dot
 ![Custom dots space](https://raw.githubusercontent.com/Pyozer/dots_indicator/master/demo/custom_space.gif)
 
 ```dart
-new DotsIndicator(
+DotsIndicator(
   dotsCount: pageLength,
   position: currentPage,
   decorator: DotsDecorator(
@@ -178,12 +238,47 @@ For example, if you want to display the dots indicator vertically, but with the 
 Set `axis: Axis.vertical` and `reversed: true`.
 Obviously, you can use reversed with `Axis.horizontal`.
 
+```dart
+DotsIndicator(
+  dotsCount: pageLength,
+  position: currentPage,
+  axis: Axis.vertical,
+  reversed: true,
+);
+```
+
 ### onTap property
 
-You can add `onTap` property, to listen when a dot has been pressed.
-Exemple:
+Add the `onTap` property to let users jump directly to a page by tapping its
+dot, instead of only reflecting the current page.
+
+```dart
+DotsIndicator(
+  dotsCount: pageLength,
+  position: currentPage,
+  onTap: (index) {
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
+  },
+);
 ```
-onTap: (position) {
-  setState(() => _currentPos = position);
-}
+
+### Fade out the last dot (indefinite pager)
+
+When `dotsCount` is large (or unknown), showing every dot isn't practical.
+Set `fadeOutLastDot: true` with a `fadeOutDistance` to only keep a window of
+dots fully visible around the current position, fading the rest out — and
+`animate: true` to transition smoothly as `position` changes.
+
+```dart
+DotsIndicator(
+  dotsCount: pageLength,
+  position: currentPage,
+  fadeOutLastDot: true,
+  fadeOutDistance: 2,
+  animate: true,
+);
 ```
